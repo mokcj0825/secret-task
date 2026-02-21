@@ -123,6 +123,30 @@ button.danger {
   margin-top: 1rem;
 }
 
+.attempt-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.attempt-main {
+  min-width: 0;
+}
+
+.attempt-score {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  min-width: 10rem;
+}
+
+.attempt-score h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
 .practice-card {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -212,7 +236,8 @@ button.danger {
 }
 
 @media (prefers-color-scheme: light) {
-  .convert-tool {
+  .convert-tool,
+  .attempt-score {
     border-color: rgba(0, 0, 0, 0.12);
     background: rgba(0, 0, 0, 0.04);
   }

@@ -52,9 +52,11 @@ app.get('/api/questions', (req, res) => {
 
 app.get('/api/questions/random', (req, res) => {
   try {
-    const row = db.prepare('SELECT * FROM questions ORDER BY RANDOM() LIMIT 1').get();
-    if (!row) return res.status(404).json({ error: 'no questions' });
-    res.json(rowToQuestion(row));
+    const n = Math.min(100, Math.max(1, parseInt(req.query.n, 10) || 1));
+    const rows = db.prepare('SELECT * FROM questions ORDER BY RANDOM() LIMIT ?').all(n);
+    if (!rows.length) return res.status(404).json({ error: 'no questions' });
+    const items = rows.map(rowToQuestion);
+    res.json(n === 1 ? items[0] : items);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
